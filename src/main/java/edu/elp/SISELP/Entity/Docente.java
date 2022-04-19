@@ -10,10 +10,10 @@ import javax.persistence.Table;
 @PrimaryKeyJoinColumn(referencedColumnName="idpersona")
 public class Docente extends Persona {
 
-    @Column(name = "cod_docente",length = 12)
+    @Column(name = "cod_docente",length = 12,nullable = false)
     private  String codDocente;
 
-    @Column(name = "indet_docente",length = 20)
+    @Column(name = "indet_docente",length = 20,nullable = false)
     private  String identdocente;
 
     public Docente() {
