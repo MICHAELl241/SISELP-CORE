@@ -29,6 +29,6 @@ public class PersonaServiceImpl implements IPersonaService {
 
     @Override
     public Persona obtenerPersonaByDni(String dni) {
-        return null;
+        return this.personaDao.buscarPersona(dni);
     }
 }

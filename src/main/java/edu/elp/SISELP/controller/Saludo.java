@@ -23,6 +23,13 @@ public class Saludo {
 
     }
 
+    @GetMapping("/buscarPersona")
+
+    public Persona buscarPersona(@RequestParam ("dni") String dni){
+        return this.personaService.obtenerPersonaByDni(dni);
+
+    }
+
     @GetMapping("/saludo")
     public String saludo(@RequestParam String nombre){
         return "Hola Mundo desde Ayacucho!!!!!....... te saluda " + nombre;
