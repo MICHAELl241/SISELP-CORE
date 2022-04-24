@@ -35,4 +35,12 @@ public class Administrador extends Persona {
     public void setCodAdmi(String codAdmi) {
         this.codAdmi = codAdmi;
     }
+
+    @Override
+    public String toString() {
+        return "Administrador{" +
+                "areaLabor='" + areaLabor + '\'' +
+                ", codAdmi='" + codAdmi + '\'' +
+                '}';
+    }
 }

@@ -10,12 +10,12 @@ public interface IPersonaDao  extends JpaRepository<Persona,Long> {
     @Query("SELECT p FROM Persona p WHERE p.dni= ?1")
     Persona buscarPersona(String dni);
 
-    Persona findByDni(String dni);
+    //Persona findByDni(String dni);
 
-    @ Query ( "SELECT p FROM Persona p WHERE p.nombre = ?1 AND p.apellido = ?2" )
-    Persona  findByNombreAndApellido ( String  nombre , String  apellido );
+   // @ Query ( "SELECT p FROM Persona p WHERE p.nombre = ?1 AND p.apellido = ?2" )
+    //Persona  findByNombreAndApellido ( String  nombre , String  apellido );
 
-    @Query ( "SELECT p FROM Persona p DONDE p.nombre = :nombre AND p.apellido = :apellido" )
-    Persona  findByNombreAndApellidoByParam (@Param( "nombre" ) String  nombre , @Param ( "apellido" ) String  apellido ) ;
+    //@Query ( "SELECT p FROM Persona p DONDE p.nombre = :nombre AND p.apellido = :apellido" )
+    //Persona  findByNombreAndApellidoByParam (@Param( "nombre" ) String  nombre , @Param ( "apellido" ) String  apellido ) ;
 
 }

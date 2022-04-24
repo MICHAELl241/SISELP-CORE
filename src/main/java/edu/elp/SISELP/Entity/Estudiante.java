@@ -46,4 +46,13 @@ public class Estudiante extends Persona {
     public void setEstadoEgreso(String estadoEgreso) {
         this.estadoEgreso = estadoEgreso;
     }
+
+    @Override
+    public String toString() {
+        return "Estudiante{" +
+                "codigo='" + codigo + '\'' +
+                ", serie='" + serie + '\'' +
+                ", estadoEgreso='" + estadoEgreso + '\'' +
+                '}';
+    }
 }

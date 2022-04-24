@@ -1,6 +1,12 @@
 package edu.elp.SISELP.controller;
+import edu.elp.SISELP.Entity.Administrador;
+import edu.elp.SISELP.Entity.Docente;
+import edu.elp.SISELP.Entity.Estudiante;
 import edu.elp.SISELP.Entity.Persona;
+import edu.elp.SISELP.service.IAdministradorService;
+import edu.elp.SISELP.service.IDocenteService;
 import edu.elp.SISELP.service.IPersonaService;
+import edu.elp.SISELP.service.IEstudianteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,6 +43,41 @@ public class Saludo {
     @GetMapping("/bienvenida")
     public String bienvenida(){
         return "Hola amig@s al curso de Java";
+    }
+
+    @Autowired
+    private IEstudianteService estudianteService ;
+
+    @GetMapping("/listaEstudiante")
+
+    public List<Estudiante> listaEstudiante(){
+        return this.estudianteService.listaEstudiante();
+
+    }
+    @Autowired
+    private IDocenteService docenteService ;
+
+    @GetMapping("/listaDocente")
+
+    public List<Docente> listaDocente(){
+        return this.docenteService.listaDocente();
+
+    }
+
+    @Autowired
+    private IAdministradorService administradorService ;
+
+    @GetMapping("/listaAdministrador")
+
+    public List<Administrador> listaAdministrador(){
+        return this.administradorService.listaAdministrador();
+
+    }
+    @GetMapping("/buscarEstudiante")
+
+    public Estudiante buscarEstudiante(@RequestParam ("codigo") String codigo){
+        return (Estudiante) this.estudianteService.obtenerEstudianteByCodigo(codigo);
+
     }
 
 
