@@ -1,9 +1,6 @@
 package edu.elp.SISELP.Entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.PrimaryKeyJoinColumn;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Date;
 
 @Entity
@@ -19,6 +16,10 @@ public class Estudiante extends Persona {
 
     @Column(name = "estado_egreso",length =5 ,nullable = false)
     private  String estadoEgreso; //sie s un egresado si, no
+
+    @ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private Escuela escuela;
+
 
     public Estudiante() {
     }
