@@ -17,12 +17,45 @@ public class Estudiante extends Persona {
     @Column(name = "estado_egreso",length =5 ,nullable = false)
     private  String estadoEgreso; //sie s un egresado si, no
 
-    @ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToOne(optional = false,  fetch = FetchType.EAGER)
     private Escuela escuela;
 
 
     public Estudiante() {
+
     }
+
+    public Estudiante(String codigo, String serie, String estadoEgreso, Escuela escuela) {
+        this.codigo = codigo;
+        this.serie = serie;
+        this.estadoEgreso = estadoEgreso;
+        this.escuela = escuela;
+    }
+
+    public Estudiante(long idpersona, String codigo, String serie, String estadoEgreso, Escuela escuela) {
+        super(idpersona);
+        this.codigo = codigo;
+        this.serie = serie;
+        this.estadoEgreso = estadoEgreso;
+        this.escuela = escuela;
+    }
+
+    public Estudiante(String nombre, String apellido, String edad, String sexo, String dni, String direccion, String telefeno, Date fechaNacimiento, String codigo, String serie, String estadoEgreso, Escuela escuela) {
+        super(nombre, apellido, edad, sexo, dni, direccion, telefeno, fechaNacimiento);
+        this.codigo = codigo;
+        this.serie = serie;
+        this.estadoEgreso = estadoEgreso;
+        this.escuela = escuela;
+    }
+
+    public Escuela getEscuela() {
+        return escuela;
+    }
+
+    public void setEscuela(Escuela escuela) {
+        this.escuela = escuela;
+    }
+
 
     public String getCodigo() {
         return codigo;
