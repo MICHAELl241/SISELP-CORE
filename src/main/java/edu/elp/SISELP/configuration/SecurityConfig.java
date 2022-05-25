@@ -104,13 +104,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/**/*.css",
                         "/**/*.js")
                 .permitAll()
-                .antMatchers("/auth/**").permitAll()
+                .antMatchers("/login/**").permitAll()
                 .antMatchers("/carta/**","/listaUnicos","/estadodoc/**","/tipodoc","/SaveOrUpdateUnico").permitAll()
-                .antMatchers("/escuela/getAllEscuelas","/certificado/**","/constancia/**").permitAll()
-                .antMatchers("/persona/**","/egresado/**","/bolsalaboral/**","/solicitud/**").permitAll()
-                .antMatchers("/practica/**", "/admin/**","/investigacion/**","/").permitAll()
-                .antMatchers("/rsu/**", "/reconocimiento/**","/tutoria/**","/alternativa/**").permitAll()
-                .antMatchers("/encuesta/**","/asignatura/**","/cargaacademica/**","/distribucion/**","/pregunta/**").permitAll()
                 .anyRequest().authenticated();
 //        http
 //                .sessionManagement()

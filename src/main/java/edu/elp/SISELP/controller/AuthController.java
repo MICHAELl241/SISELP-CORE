@@ -27,7 +27,7 @@ import javax.validation.Valid;
 import java.util.*;
 
 @RestController
-@RequestMapping("/auth")
+@RequestMapping("/login")
 public class AuthController {
 
     @Autowired
@@ -50,7 +50,7 @@ public class AuthController {
 
     private static final Log LOGGER = LogFactory.getLog(AuthController.class);
 
-    @PostMapping("/signin")
+    @PostMapping("/logueo")
     public JwtAuthenticationResponse authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
         LOGGER.info(" PARAMETROS DE LOGUEO: <<<<<<<>>>>>> '"+ loginRequest.toString() + "'");
         Authentication authentication = authenticationManager.authenticate(
@@ -71,12 +71,12 @@ public class AuthController {
 
             Collection<? extends GrantedAuthority> rol = userDetails.getAuthorities();
 
-            //return new JwtAuthenticationResponse(HttpStatus.OK.value(),"Sesión de inicio correcto",jwt, userDetails.getUsername(),userDetails.getAuthorities(), user.getPersona().getNombre(),user.getPersona().getIdpersona());
+            return new JwtAuthenticationResponse(HttpStatus.OK.value(),"Sesión de inicio correcto",jwt, userDetails.getUsername(),userDetails.getAuthorities(), user.getPersona().getNombre(),user.getPersona().getIdpersona());
         }
         return new JwtAuthenticationResponse(HttpStatus.UNAUTHORIZED.value(),"Credenciales invalidas o usuario no registrado");
     }
 
-    @PostMapping("/signup")
+    @PostMapping("/registro")
     public RestResponse registerUser(@Valid @RequestBody SignUpRequest signUpRequest) {
 
         LOGGER.info(" PARAMETROS DE LOGUEO: <<<<<<<>>>>>> '"+ signUpRequest.toString() + "'");

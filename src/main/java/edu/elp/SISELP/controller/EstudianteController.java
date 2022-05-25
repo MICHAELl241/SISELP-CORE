@@ -6,10 +6,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.elp.SISELP.Entity.Escuela;
 import edu.elp.SISELP.Entity.Estudiante;
 import edu.elp.SISELP.service.IEstudianteService;
+import edu.elp.SISELP.util.RestResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,9 +27,19 @@ public class EstudianteController {
     private ObjectMapper objectMapper;
 
     @GetMapping("/list")
-     public List<Estudiante> listaEstudianteByEscuela(@RequestParam("idescuela")Escuela idescuela){
-         return this.estudianteService.listaEstudiantesByEscuela(idescuela);
-     }
+     public RestResponse listaEstudianteByEscuela(@RequestParam("idescuela")Escuela idescuela){
+        List<Estudiante> estudianteList = this.estudianteService.listaEstudiantesByEscuela(idescuela);
+        try{
+            if (estudianteList.isEmpty()){
+                return new RestResponse(HttpStatus.NO_CONTENT.value(),"No se encontraron registros");
+            }else {
+                return new RestResponse(HttpStatus.OK.value(),"Registro de estudiantes",estudianteList);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            return new RestResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(),"Estamos trabajando en ello, vuelva mas tarde");
+        }
+    }
     @GetMapping("/listPorPagina")
     public Page<Estudiante> listaEstudiantesPorPagina(@RequestParam("pagina") int pagina, @RequestParam("idescuela")Escuela idescuela){
         Pageable pageable = PageRequest.of(pagina,3);
@@ -35,13 +47,16 @@ public class EstudianteController {
     }
 
      @PostMapping("/registrar")
-    public String registrarEstudiante(@RequestBody String jsonEstudiante) throws JsonProcessingException {
+    public RestResponse registrarEstudiante(@RequestBody String jsonEstudiante) throws JsonProcessingException {
 
-         ObjectMapper objectMapper=new ObjectMapper();
-
-         Estudiante estudiante = objectMapper.readValue(jsonEstudiante,Estudiante.class);
-         this.estudianteService.guardarEstudiante(estudiante);
-         return " se guardo corectamente";
+         Estudiante estudiante = this.objectMapper.readValue(jsonEstudiante,Estudiante.class);
+         try{
+             this.estudianteService.guardarEstudiante(estudiante);
+             return new RestResponse(HttpStatus.OK.value(),"Registro guardado satisfactoriamente",estudiante);
+         }catch (Exception e){
+             e.printStackTrace();
+             return new RestResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(),"Lamentamos el inconveniente, vuelva mas tarde");
+         }
          
 
      }

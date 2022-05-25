@@ -22,6 +22,16 @@ public class JwtAuthenticationResponse {
     private Long idusuario;
     private Boolean estado;
 
+    public JwtAuthenticationResponse(Integer code, String message, String accessToken, String username, Collection<? extends GrantedAuthority> authorities, String usuario, Long idusuario) {
+        this.code = code;
+        this.message = message;
+        this.accessToken = accessToken;
+        this.username = username;
+        this.authorities = authorities;
+        this.usuario = usuario;
+        this.idusuario = idusuario;
+    }
+
     public JwtAuthenticationResponse(Integer code, String message) {
         this.code = code;
         this.message = message;
